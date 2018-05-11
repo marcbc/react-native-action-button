@@ -96,7 +96,7 @@ export default class ActionButton extends Component {
     return (
       <View
         pointerEvents="box-none"
-        style={[this.getOverlayStyles(), this.props.style]}
+        style={[this.getOverlayStyles(), this.props.style, { position: this.props.positioningMode }]}
       >
         <Animated.View
           pointerEvents="none"
@@ -108,7 +108,8 @@ export default class ActionButton extends Component {
                 inputRange: [0, 1],
                 outputRange: [0, this.props.bgOpacity]
               })
-            }
+            },
+            { position: this.props.positioningMode },
           ]}
         >
           {this.props.backdrop}
@@ -118,7 +119,8 @@ export default class ActionButton extends Component {
           style={[
             this.getOverlayStyles(),
             this.getOrientation(),
-            this.getOffsetXY()
+            this.getOffsetXY(),
+            { position: this.props.positioningMode },
           ]}
         >
           {this.state.active &&
@@ -349,7 +351,7 @@ ActionButton.propTypes = {
   ]),
 
   renderIcon: PropTypes.func,
-  
+
   bgColor: PropTypes.string,
   bgOpacity: PropTypes.number,
   buttonColor: PropTypes.string,
@@ -374,7 +376,9 @@ ActionButton.propTypes = {
   fixNativeFeedbackRadius: PropTypes.bool,
   nativeFeedbackRippleColor: PropTypes.string,
 
-  testID: PropTypes.string
+  testID: PropTypes.string,
+
+  positioningMode: PropTypes.string
 };
 
 ActionButton.defaultProps = {
@@ -403,7 +407,8 @@ ActionButton.defaultProps = {
   activeOpacity: DEFAULT_ACTIVE_OPACITY,
   fixNativeFeedbackRadius: false,
   nativeFeedbackRippleColor: "rgba(255,255,255,0.75)",
-  testID: undefined
+  testID: undefined,
+  positioningMode: "absolute"
 };
 
 const styles = StyleSheet.create({
